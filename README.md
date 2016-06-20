@@ -1,2 +1,0 @@
-# KELshield
-Arduino KELshield library
