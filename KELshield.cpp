@@ -3,39 +3,36 @@
 
 #define SCL_HI	(PORTC |= (1<<5))
 #define SCL_LO	(PORTC &= ~(1<<5))
-#define SDA		(PINC & (1 << 4))
+#define SDA	(PINC & (1 << 4))
 #define SHLD_HI	(PORTB |= (1<<5))
 #define SHLD_LO	(PORTB &= ~(1<<5))
 
 byte displayBuffer[5];
-unsigned long ms = 0;
 byte disp = 4;
 
-ISR(TIMER0_COMPA_vect)
+ISR(TIMER2_COMPA_vect)
 {
-	//prekid tajmera 0 usled dostizanja vrednosti registra OCR0A
+	//timer2 interrupt routine
 	if (++disp > 4)
 		disp = 0;
-	PORTB = ~(1 << (4 - disp));		//ukljucenje tranzistora
-	PORTD = ~displayBuffer[disp];	//ispis na trenutno aktivan displej
-	ms++;							//sistemsko vreme
+	PORTB = ~(1 << (4 - disp));	//turn transistor on
+	PORTD = ~displayBuffer[disp];	//refresh display
 }
 
 KELshield::KELshield()
 {
 	byte i;
 
-	DDRD = 0xff;	//ceo port D izlazi
-	DDRC = 0xe0;	//PC5 izlaz, PC4-PC0 ulazi
-	DDRB = 0x3f;	//PB5 - PB0 izlazi
+	DDRD = 0xff;	//port D output
+	DDRC = 0xe0;	//PC5 outpir, PC4-PC0 input
+	DDRB = 0x3f;	//PB5 - PB0 output
 
-	//inicijalizacija tajmera 0:
-	 TCCR0A = 0x02; //tajmer 0: CTC mod
-	 TCCR0B = 0x03; //tajmer 0: fclk = fosc/64
-	 OCR0A = 249;	//perioda tajmera 0: 250 Tclk (OCR0A + 1 = 250)
-	 TIMSK0 = 0x02;	//dozvola prekida tajmera 0
-					//usled dostizanja vrednosti registra OCR0A
-	 sei(); 		//I = 1 (dozvola prekida)
+	//init tajmera 2:
+	 TCCR2A = 0x02; //timer2: CTC mode
+	 TCCR2B = 0x03; //timer2: fclk = fosc/64
+	 OCR2A = 249;	//timer2 period: 250 Tclk (OCR0A + 1 = 250)
+	 TIMSK2 = 0x02;	//timer2 output compare match A interrupt enable
+	 sei(); 	//I = 1 (interrupt enable)
 }
 
 void KELshield::writeDisplay(byte d, byte value)
@@ -54,10 +51,11 @@ byte KELshield::readSwitches()
 
 	SHLD_HI;
 	SHLD_LO;
-	SHLD_HI;	//impuls za punjenje bafera
+	SHLD_HI;	//load buffer
 
 	for (i=0; i<8; i++)
 	{
+		//read data from serial buffer
 		SCL_LO;
 		SCL_HI;
 
