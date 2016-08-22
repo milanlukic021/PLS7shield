@@ -1,6 +1,6 @@
 #include <KELshield.h>
 
-KELshield shield;
+PLS7shield shield;
 
 void setup()
 {
