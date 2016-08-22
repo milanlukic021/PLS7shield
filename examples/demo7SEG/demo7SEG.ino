@@ -1,6 +1,6 @@
 #include <KELshield.h>
 
-KELshield shield;
+PLS7shield shield;
 
 const byte symbols[] = {
   0xf3, 0x5b, 0xd8, 0x3b
