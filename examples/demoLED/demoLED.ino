@@ -1,15 +1,14 @@
 #include <KELshield.h>
 
-KELshield shield; //instanciranje klase KELshield
+KELshield shield;
 
 void setup()
 {
-  shield.writeDisplay(LEDS, B01010101); //ukljucuju se LED diode
-  //na parnim pozicijama
+  shield.writeDisplay(LEDS, B01010101); //turn ON LEDs on even positions
 }
 void loop()
 {
-  byte stanje_LED = shield.readDisplay(LEDS); //ocitavanje sadrzaja bafera
-  shield.writeDisplay(LEDS, ~stanje_LED); //upis invertovane vrednosti
-  delay(1000); //pauza 1s
+  byte stanje_LED = shield.readDisplay(LEDS); //read LED buffer
+  shield.writeDisplay(LEDS, ~stanje_LED);     //invert
+  delay(1000);
 }
