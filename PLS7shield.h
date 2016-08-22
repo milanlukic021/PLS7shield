@@ -1,7 +1,7 @@
 #include "Arduino.h"
 
-#ifndef _KELshield_h
-#define _KELshield_h
+#ifndef _PLS7shield_h
+#define _PLS7shield_h
 #endif
 
 #define LEDS	0
@@ -24,10 +24,10 @@
 #define S7	6
 #define S8	7
 
-class KELshield
+class PLS7shield
 {
   public:
-    KELshield();
+  	PLS7shield();
 	void writeDisplay(byte d, byte value);
 	byte readDisplay(byte d);
 	byte readSwitches();
