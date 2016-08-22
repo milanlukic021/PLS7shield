@@ -8,10 +8,10 @@ const byte symbols[] = {
 
 void setup()
 {
-  shield.writeDisplay(D1, simboli[0]); //D1 <- 'A'
-  shield.writeDisplay(D2, simboli[1]); //D2 <- 'b'
-  shield.writeDisplay(D3, simboli[2]); //D3 <- 'C'
-  shield.writeDisplay(D4, simboli[3]); //D4 <- 'd'
+  shield.writeDisplay(D1, symbols[0]); //D1 <- 'A'
+  shield.writeDisplay(D2, symbols[1]); //D2 <- 'b'
+  shield.writeDisplay(D3, symbols[2]); //D3 <- 'C'
+  shield.writeDisplay(D4, symbols[3]); //D4 <- 'd'
 }
 
 void loop()
