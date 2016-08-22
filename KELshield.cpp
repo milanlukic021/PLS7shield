@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "KELshield.h"
+#include "PLS7shield.h"
 
 #define SCL_HI	(PORTC |= (1<<5))
 #define SCL_LO	(PORTC &= ~(1<<5))
