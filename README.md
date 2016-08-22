@@ -1,2 +1,2 @@
-# KELshield
-Arduino KELshield library
+# PLS7shield
+Arduino PLS7shield library
