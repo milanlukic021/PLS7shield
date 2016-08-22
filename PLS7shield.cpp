@@ -29,7 +29,7 @@ PLS7shield::PLS7shield()
 
 	//init tajmera 2:
 	 TCCR2A = 0x02; //timer2: CTC mode
-	 TCCR2B = 0x03; //timer2: fclk = fosc/64
+	 TCCR2B = 0x04; //timer2: fclk = fosc/64
 	 OCR2A = 249;	//timer2 period: 250 Tclk (OCR0A + 1 = 250)
 	 TIMSK2 = 0x02;	//timer2 output compare match A interrupt enable
 	 sei(); 	//I = 1 (interrupt enable)
