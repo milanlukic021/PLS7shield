@@ -2,9 +2,9 @@
 
 KELshield shield;
 
-const byte simboli[] = {
+const byte symbols[] = {
   0xf3, 0x5b, 0xd8, 0x3b
-}; //look-up tabela sa simbolima za ispis na displej (A,b,C,d)
+}; //look-up table with symbols (A,b,C,d)
 
 void setup()
 {
