@@ -19,7 +19,7 @@ ISR(TIMER2_COMPA_vect)
 	PORTD = ~displayBuffer[disp];	//refresh display
 }
 
-KELshield::KELshield()
+PLS7shield::PLS7shield()
 {
 	byte i;
 
@@ -35,17 +35,17 @@ KELshield::KELshield()
 	 sei(); 	//I = 1 (interrupt enable)
 }
 
-void KELshield::writeDisplay(byte d, byte value)
+void PLS7shield::writeDisplay(byte d, byte value)
 {
 	displayBuffer[d] = value;
 }
 
-byte KELshield::readDisplay(byte d)
+byte PLS7shield::readDisplay(byte d)
 {
 	return displayBuffer[d];
 }
 
-byte KELshield::readSwitches()
+byte PLS7shield::readSwitches()
 {
 	byte i, tmp = 0, mask = 0x80;
 
@@ -67,7 +67,7 @@ byte KELshield::readSwitches()
 	return ~tmp;
 }
 
-byte KELshield::switchState(byte s)
+byte PLS7shield::switchState(byte s)
 {
 	byte sw = readSwitches();
 	
@@ -77,7 +77,7 @@ byte KELshield::switchState(byte s)
 		return LOW;
 }
 
-byte KELshield::buttonState(byte b)
+byte PLS7shield::buttonState(byte b)
 {
 	switch(b)
 	{
