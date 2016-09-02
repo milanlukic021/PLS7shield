@@ -21,18 +21,16 @@ ISR(TIMER2_COMPA_vect)
 
 PLS7shield::PLS7shield()
 {
-	byte i;
-
 	DDRD = 0xff;	//port D output
 	DDRC = 0xe0;	//PC5 outpir, PC4-PC0 input
 	DDRB = 0x3f;	//PB5 - PB0 output
 
-	//init tajmera 2:
-	 TCCR2A = 0x02; //timer2: CTC mode
-	 TCCR2B = 0x04; //timer2: fclk = fosc/64
-	 OCR2A = 249;	//timer2 period: 250 Tclk (OCR0A + 1 = 250)
-	 TIMSK2 = 0x02;	//timer2 output compare match A interrupt enable
-	 sei(); 	//I = 1 (interrupt enable)
+
+	TCCR2A = 0x02; //timer2: CTC mode
+	TCCR2B = 0x04; //timer2: fclk = fosc/64
+	OCR2A = 249;	//timer2 period: 250 Tclk (OCR0A + 1 = 250)
+	TIMSK2 = 0x02;	//timer2 output compare match A interrupt enable
+	sei(); 	//I = 1 (interrupt enable)
 }
 
 void PLS7shield::writeDisplay(byte d, byte value)
@@ -47,6 +45,7 @@ byte PLS7shield::readDisplay(byte d)
 
 byte PLS7shield::readSwitches()
 {
+	//bit-banged serial read
 	byte i, tmp = 0, mask = 0x80;
 
 	SHLD_HI;
