@@ -2,7 +2,6 @@
 
 #ifndef _PLS7shield_h
 #define _PLS7shield_h
-#endif
 
 #define LEDS	0
 #define D1	1
@@ -34,3 +33,5 @@ class PLS7shield
 	byte switchState(byte s);
 	byte buttonState(byte b);
 };
+
+#endif
