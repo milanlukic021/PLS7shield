@@ -7,8 +7,8 @@
 #define SHLD_HI	(PORTB |= (1<<5))
 #define SHLD_LO	(PORTB &= ~(1<<5))
 
-byte displayBuffer[5];
-byte disp = 4;
+volatile byte displayBuffer[5];
+volatile byte disp = 4;
 
 ISR(TIMER2_COMPA_vect)
 {
